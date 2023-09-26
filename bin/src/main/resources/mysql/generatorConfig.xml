@@ -4,6 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <properties resource="generatorConfig.properties"/>
+    
     <context id="myContext" targetRuntime="MyBatis3">
         <!-- -->
         <property name="beginningDelimiter" value="&quot;"/>

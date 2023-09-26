@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+	<properties resource="mysql/generatorConfig.properties" />
+
+	<!-- 指定 JDBC 的路径，防止 eclipse 插件报错 -->
+	<classPathEntry
+		location="C:\Users\jiangchunbo\.m2\repository\mysql\mysql-connector-java\8.0.28\mysql-connector-java-8.0.28.jar" />
+
+	<context id="myContext" targetRuntime="MyBatis3">
+		<!-- -->
+		<property name="beginningDelimiter" value="`" />
+		<property name="endingDelimiter" value="`" />
+
+
+		<!-- 关于注解的时间格式化格式，给 SimpleDateFormat 用 -->
+		<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss" />
+
+		<!-- 不指定可能会使用默认的 GBK -->
+		<property name="javaFileEncoding" value="UTF-8" />
+
+
+		<!-- <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/> -->
+		<!-- <plugin type="com.jiangchunbo.mybatis.generator.plugins.BasePlugin"/> -->
+		<!-- <plugin type="com.jiangchunbo.mybatis.generator.plugins.RenameXmlMapperPlugin"/> 
+			<plugin type="com.jiangchunbo.mybatis.generator.plugins.LombokModelPlugin"/> -->
+
+		<commentGenerator
+			type="com.jiangchunbo.mybatis.generator.ext.CustomCommentGenerator">
+			<!-- 压制日期。如果为 true，则注释部分不显示日期 -->
+			<property name="suppressDate" value="false" />
+			<!-- 压制所有注释。如果为 true，则注释不显示，将会导致合并代码失效 -->
+			<property name="suppressAllComments" value="false" />
+			<property name="addRemarkComments" value="true" />
+			<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="${driver-class}"
+			connectionURL="${connection-url}" userId="${user-id}"
+			password="${password}">
+
+			<property name="nullCatalogMeansCurrent" value="true" />
+			<!-- <property name="useInformationSchema" value="true" /> -->
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<!-- 增加下面这行，用于配置生成LocalDateTime对应数据库的DATETIME类型 -->
+			<property name="useJSR310Types" value="true" />
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator
+			targetPackage="${java-model-generator.target-package}"
+			targetProject="${java-model-generator.target-project}">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator
+			targetPackage="${sql-map-generator.target-package}"
+			targetProject="${sql-map-generator.target-project}">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="${java-client-generator.target-package}"
+			targetProject="${java-client-generator.target-project}">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<table tableName="%" schema="xc402_content" enableInsert="true"
+			enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true"
+			enableDeleteByPrimaryKey="false" enableCountByExample="false"
+			enableUpdateByExample="false" enableDeleteByExample="false"
+			enableSelectByExample="false" selectByExampleQueryId="false" />
+	</context>
+</generatorConfiguration>
